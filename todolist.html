@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>todos</title>
+    <link rel="stylesheet" href="todolist.css">
+  </head>
+  <body>
+    <header>
+      <h1>todos</h1>
+      
+    </header>
+    <div class="main">
+      <input type="checkbox" id="checkall" ><label for="checkall"></label>
+      <input id="new" placeholder="What needs to be done?" autofocus value="">
+    
+    <ul id='list'>
+      <li style="padding:0;"></li>
+
+    </ul>
+  </div>
+    <footer class="main footer">
+      <div id="sum">0 item left</div>
+      <div class="option">
+        <a id="all">all</a>
+        <a id="completed">completed</a>
+        <a id="active">active</a>
+      </div>
+      
+    </footer>
+    <script src="components.js"></script>
+    <script src="interface.js"></script>
+    <script src="main.js"></script>
+
+  </body>
+</html>
