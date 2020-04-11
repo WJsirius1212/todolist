@@ -1,8 +1,7 @@
-function AddNewTodo(){
-  let content=GetContent('new');
-  if(JudgeContent(content)){
-    let id=Count()+1;
-    let template=ModifyTemplate(id,content);
+function addNewTodo(content){
+  if(judgeContent(content)){
+    let id=count()+1;
+    let template=modifyTemplate(id,content);
     //append newtodo
     let node=document.createElement("li");
     node.innerHTML=template;
@@ -13,32 +12,32 @@ function AddNewTodo(){
     return false; }
 }
 
-function AddEventListener(i){
+function addChecked(i){
   let checkBoxes=document.getElementsByClassName('checkbox');
-  checkBoxes[i].addEventListener("click", Checked);
+  checkBoxes[i].addEventListener("click", checked);
 }
 
-function AddDelete(i){
+function addDelete(i){
   let checkBoxes=document.getElementsByClassName('checkbox');
-  checkBoxes[i].parentNode.lastChild.addEventListener("click", Delete);
+  checkBoxes[i].parentNode.lastChild.addEventListener("click", myDelete);
 }
 
-function AddEdit(i){
+function addEdit(i){
   let checkBoxes=document.getElementsByClassName('checkbox');
-  checkBoxes[i].parentNode.addEventListener("dblclick", Edit);
+  checkBoxes[i].parentNode.addEventListener("dblclick", edit);
 }
 
-function NewTodo(){
-  if(AddNewTodo()){
-    AddEventListener(Count()-1);
-    AddDelete(Count()-1);
-    AddEdit(Count()-1);
+function newTodo(content){
+  if(addNewTodo(content)){
+    addChecked(count()-1);
+    addDelete(count()-1);
+    addEdit(count()-1);
   }else{
     return;
   }
 }
 
-function ControlAll(){
+function controlAll(){
   let state;
   let check;
   if(this.checked){
@@ -56,12 +55,27 @@ function ControlAll(){
   
 }
 
-function Left(){
-  let n=CountActive();
+function left(){
+  let n=countActive();
   let str=' item left';
   if(n>1){
     str=' items left';
   }
   document.getElementById('sum').innerText=n+str;
 }
+//storeandload
+function storeList(){
+  let checkBoxes=document.getElementsByClassName('checkbox');
+  for (let i=0;i<checkBoxes.length;i++){
+    let span=checkBoxes[i].parentNode.lastChild.previousSibling;
+    localStorage.setItem(i.toString(),span.innerText);
+  }
+}
 
+function loadList(){
+  for(let i=0;localStorage.getItem(i.toString());i++){
+    let content=localStorage.getItem(i.toString());
+    newTodo(content);
+  }
+  console.log('loaded.');
+}

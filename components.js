@@ -1,13 +1,13 @@
 
 // 获取内容，去掉首尾空格
-function GetContent(id){
+function getContent(id){
   let content=document.getElementById(id).value.trim();
   document.getElementById(id).value=''
   return content;
 }
 
 // 判断内容
-function JudgeContent(content){
+function judgeContent(content){
   let j;
   if (content){
     j=true;
@@ -26,7 +26,7 @@ let defaultTemplate='<input class="checkbox"type="checkbox" id="{{id1}}">'
 
 
 //模板修改
-function ModifyTemplate(id,content){
+function modifyTemplate(id,content){
   let template=defaultTemplate
   let tid1='{{id1}}';
   let tid2='{{id2}}';
@@ -45,7 +45,7 @@ function addElement(template){
 }
 
 //checked
-function Checked(){
+function checked(){
   let completed='completed';
   let active='active';
   let state=this.parentNode.lastChild.previousSibling;
@@ -57,13 +57,13 @@ function Checked(){
 }
 
 //count newtodoid
-function Count(){
+function count(){
   let count=document.getElementsByClassName('checkbox').length;
   return count;
 }
 
 //CountActive
-function CountActive(){
+function countActive(){
   let counta=0;
   let checkBoxes=document.getElementsByClassName('checkbox');
   for (let i=0;i<checkBoxes.length;i++){
@@ -75,7 +75,7 @@ function CountActive(){
   return counta;
 }
 
-function Delete(){
+function myDelete(){
   let li=this.parentNode;
   let children=li.childNode;
   for(let i in children){
@@ -84,34 +84,37 @@ function Delete(){
   li.parentNode.removeChild(li);
 }
 
-function Hide(state){
+function hide(state){
   //active->false completed->true
   let checkBoxes=document.getElementsByClassName('checkbox');
   for (let i=0;i<checkBoxes.length;i++){
     let li=checkBoxes[i].parentNode;
     li.setAttribute('class','show');
-    console.log(checkBoxes[i].checked);
+    //console.log(checkBoxes[i].checked);
     if (checkBoxes[i].checked!==state){     
       li.setAttribute('class','hide');
     }
   }
 }
 
-function All(){
+function all(){
   let checkBoxes=document.getElementsByClassName('checkbox');
   for (let i=0;i<checkBoxes.length;i++){
     let li=checkBoxes[i].parentNode;
+    if(li.previousSibling.nodeType==3){
+      continue;
+    }
     li.setAttribute('class','show');
   }
 }
 
-function Edit(){
+function edit(){
   let input=document.createElement('input');
   input.value=this.lastChild.previousSibling.innerText;
   input.setAttribute('class','edit');
   this.parentNode.insertBefore(input, this);
   this.setAttribute('class','hide');
-  input.addEventListener('blur',function(){
+  input.addEventListener('mouseout',function(){
     if(this.value.trim()){
     this.nextSibling.lastChild.previousSibling.innerText=this.value.trim();
     this.nextSibling.setAttribute('class','show');
@@ -123,3 +126,4 @@ function Edit(){
   })
   
 }
+
