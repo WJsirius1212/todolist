@@ -65,6 +65,8 @@ function left(){
 }
 //storeandload
 function storeList(){
+  //clear
+  localStorage.clear();
   let checkBoxes=document.getElementsByClassName('checkbox');
   for (let i=0;i<checkBoxes.length;i++){
     let span=checkBoxes[i].parentNode.lastChild.previousSibling;

@@ -114,15 +114,17 @@ function edit(){
   input.setAttribute('class','edit');
   this.parentNode.insertBefore(input, this);
   this.setAttribute('class','hide');
-  input.addEventListener('mouseout',function(){
+  input.focus();
+
+  input.addEventListener('blur',function(){
     if(this.value.trim()){
-    this.nextSibling.lastChild.previousSibling.innerText=this.value.trim();
-    this.nextSibling.setAttribute('class','show');
-    this.parentNode.removeChild(this);
-  }else{
-    this.parentNode.removeChild(this.nextSibling);
-    this.parentNode.removeChild(this);
-  }
+      this.nextSibling.lastChild.previousSibling.innerText=this.value.trim();
+      this.nextSibling.setAttribute('class','show');
+      this.parentNode.removeChild(this);
+    }else{
+      this.parentNode.removeChild(this.nextSibling);
+      this.parentNode.removeChild(this);
+    }
   })
   
 }
