@@ -70,14 +70,26 @@ function storeList(){
   let checkBoxes=document.getElementsByClassName('checkbox');
   for (let i=0;i<checkBoxes.length;i++){
     let span=checkBoxes[i].parentNode.lastChild.previousSibling;
-    localStorage.setItem(i.toString(),span.innerText);
+    let state=checkBoxes[i].checked===true?1:0;
+    localStorage.setItem(i.toString(),span.innerText+state.toString());
   }
 }
 
 function loadList(){
   for(let i=0;localStorage.getItem(i.toString());i++){
     let content=localStorage.getItem(i.toString());
-    newTodo(content);
+    let state=content.slice(-1);
+    console.log(state);
+    newTodo(content.slice(0,-1));
+    if(state==='1'){
+      let checkBox=document.getElementsByClassName('checkbox')[i];
+      let span=checkBox.parentNode.lastChild.previousSibling;
+      span.setAttribute('class','completed');
+      checkBox.checked=true;
+    }
+  }
+  if(count()!=countActive()){
+    document.getElementById('checkall').checked=true;
   }
   console.log('loaded.');
 }
